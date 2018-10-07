@@ -1,16 +1,8 @@
-# weblate-docker
+# weblate-docker-compose
 
-[![Build Status](https://travis-ci.org/WeblateOrg/docker.svg?branch=master)](https://travis-ci.org/WeblateOrg/docker)
+[![Build Status](https://travis-ci.com/WeblateOrg/docker-compose.svg?branch=master)](https://travis-ci.com/WeblateOrg/docker-compose)
 
-Docker container for Weblate
-
-## Docker hub tags
-
-You can use following tags on Docker hub:
-
-* `latest` - latest stable release
-* `edge` - bleeding edge docker image (contains stable Weblate, but the Docker image changes might not yet be fully tested)
-* specific tag from [weblate/weblate](https://hub.docker.com/r/weblate/weblate/tags/) image
+The docker-compose for Docker container for Weblate
 
 ## Documentation
 
@@ -46,5 +38,5 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
 
 ## Rebuilding the weblate docker image
 
-The `docker-compose` files can be found in the `master` branch of https://github.com/WeblateOrg/docker.
-The weblate docker image is built from the `docker` branch of https://github.com/WeblateOrg/docker.
+The `docker-compose` files can be found in https://github.com/WeblateOrg/docker-compose.
+The weblate docker image is built from https://github.com/WeblateOrg/docker.
