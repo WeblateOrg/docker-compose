@@ -23,6 +23,7 @@ services:
 before_script:
   - sed -i "s/^WEBLATE_DEBUG=.*/WEBLATE_DEBUG=$DEBUG/" environment
   - docker-compose build
+  - docker version
 
 script:
   - ./test.sh
