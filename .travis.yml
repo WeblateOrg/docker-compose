@@ -1,9 +1,6 @@
 sudo: required
 
 env:
-  matrix:
-    - DEBUG=1
-    - DEBUG=0
   global:
     - DOCKER_COMPOSE_VERSION=1.22.0
 
@@ -17,7 +14,6 @@ services:
   - docker
 
 before_script:
-  - sed -i "s/^WEBLATE_DEBUG=.*/WEBLATE_DEBUG=$DEBUG/" environment
   - docker-compose build
   - docker version
 
