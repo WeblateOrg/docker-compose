@@ -15,7 +15,7 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
 1. Create a `docker-compose.override.yml` file with your settings.
 
     ```yml
-    version: '2'
+    version: '3'
     services:
       weblate:
         environment:
