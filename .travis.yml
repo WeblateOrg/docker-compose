@@ -1,7 +1,5 @@
 sudo: required
 
-language: python
-
 env:
   matrix:
     - DEBUG=1
