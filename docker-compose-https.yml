@@ -2,9 +2,6 @@ version: '3'
 services:
   weblate:
     image: weblate/weblate
-    links:
-      - database
-      - cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -33,8 +30,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-    links:
-      - weblate
     restart: always
     environment:
       STAGE: production
