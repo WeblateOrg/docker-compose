@@ -34,6 +34,8 @@ services:
     environment:
       STAGE: production
       PROXY_READ_TIMEOUT: 3600
+    volumes:
+      - ssl-certs:/var/lib/https-portal
 volumes:
   weblate-data: {}
   postgres-data: {}
