@@ -40,3 +40,4 @@ volumes:
   weblate-data: {}
   postgres-data: {}
   redis-data: {}
+  ssl-certs: {}
