@@ -2,9 +2,6 @@ version: '3'
 services:
   weblate:
     image: weblate/weblate
-    links:
-      - database
-      - cache
     ports:
       - 80:80
     volumes:
