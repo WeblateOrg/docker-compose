@@ -34,6 +34,8 @@ if [ $RET2 -ne 0 -o $RET -ne 0 ] ; then
     exit 1
 fi
 
+echo "Python packages:"
+docker-compose exec weblate pip3 list
 
 echo "Creating admin..."
 docker-compose exec weblate weblate createadmin || exit 1
