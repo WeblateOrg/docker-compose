@@ -37,7 +37,7 @@ fi
 echo "Python packages:"
 docker-compose exec weblate pip3 list
 
-echo "Python packages:"
+echo "Deploy checks:"
 docker-compose exec weblate weblate check --deploy
 
 echo "Creating admin..."
