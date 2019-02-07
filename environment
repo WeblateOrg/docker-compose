@@ -49,7 +49,7 @@ REDIS_HOST=cache
 REDIS_PORT=6379
 
 # Mail server, the server has to listen on port 587 and understand TLS
-WEBLATE_EMAIL_HOST=smtp.gmail.com
+WEBLATE_EMAIL_HOST=127.0.0.1
 # Do NOT use quotes here
 WEBLATE_EMAIL_USER=
 # Do NOT use quotes here
