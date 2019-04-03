@@ -50,7 +50,7 @@ echo "Supervisor status:"
 docker-compose exec weblate supervisorctl status all || exit 1
 
 echo "Running testsuite..."
-docker-compose exec --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate test --noinput weblate.accounts weblate.trans weblate.lang weblate.api weblate.gitexport weblate.screenshots weblate.utils weblate.machinery weblate.auth weblate.formats
+docker-compose exec --user weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate test --noinput weblate.accounts weblate.trans weblate.lang weblate.api weblate.gitexport weblate.screenshots weblate.utils weblate.machinery weblate.auth weblate.formats
 if [ $? -ne 0 ] ; then
     docker-compose logs
     exit 1
