@@ -11,7 +11,7 @@ services:
       - database
       - cache
     environment:
-      - WEBLATE_ENABLE_HTTPS=1
+      WEBLATE_ENABLE_HTTPS: 1
   database:
     image: postgres:9.6-alpine
     env_file:
