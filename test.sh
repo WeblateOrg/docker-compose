@@ -41,6 +41,7 @@ echo "Deploy checks:"
 docker-compose exec \
     --user weblate \
     --env WEBLATE_SILENCED_SYSTEM_CHECKS=weblate.E003,weblate.E017,security.W004,security.W008,security.W012,security.W018,weblate.I021 \
+    --env WEBLATE_TIME_ZONE=Europe/Prague \
     weblate weblate check --deploy || exit 1
 
 echo "Creating admin..."
