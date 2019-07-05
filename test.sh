@@ -9,6 +9,14 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
+cat >>docker-compose.override.yml <<EOT
+version: '3'
+services:
+  weblate:
+    environment:
+      WEBLATE_TIME_ZONE: Europe/Prague
+EOT
+
 echo "Starting up containers..."
 docker-compose up -d || exit 1
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
@@ -41,7 +49,6 @@ echo "Deploy checks:"
 docker-compose exec \
     --user weblate \
     --env WEBLATE_SILENCED_SYSTEM_CHECKS=weblate.E003,weblate.E017,security.W004,security.W008,security.W012,security.W018,weblate.I021 \
-    --env WEBLATE_TIME_ZONE=Europe/Prague \
     weblate weblate check --deploy || exit 1
 
 echo "Creating admin..."
