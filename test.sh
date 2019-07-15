@@ -9,12 +9,15 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
+PORT=9999
+
 cat >>docker-compose.override.yml <<EOT
 version: '3'
 services:
   weblate:
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
+      WEBLATE_PORT: $PORT
 EOT
 
 echo "Starting up containers..."
@@ -22,18 +25,18 @@ docker-compose up -d || exit 1
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
 
-echo "Checking '$CONTAINER', IP address '$IP'"
+echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
 TIMEOUT=0
-while ! curl --fail --silent --output /dev/null "http://$IP/" ; do
+while ! curl --fail --silent --output /dev/null "http://$IP:$PORT/" ; do
     sleep 1
     TIMEOUT=$(($TIMEOUT + 1))
     if [ $TIMEOUT -gt 60 ] ; then
         break
     fi
 done
-curl --verbose --fail "http://$IP/about/" | grep 'Powered by.*Weblate'
+curl --verbose --fail "http://$IP:$PORT/about/" | grep 'Powered by.*Weblate'
 RET=$?
-curl --verbose --fail --output /dev/null "http://$IP/static/weblate-128.png"
+curl --verbose --fail --output /dev/null "http://$IP:$PORT/static/weblate-128.png"
 RET2=$?
 # Display logs so far
 docker-compose logs
