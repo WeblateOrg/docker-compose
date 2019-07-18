@@ -9,21 +9,19 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
-PORT=9999
-
 cat >>docker-compose.override.yml <<EOT
 version: '3'
 services:
   weblate:
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
-      WEBLATE_PORT: $PORT
 EOT
 
 echo "Starting up containers..."
 docker-compose up -d || exit 1
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
+PORT=$(docker inspect --format='{{.Config.ExposedPorts}}' $CONTAINER | tr -d -c 0-9)
 
 echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
 TIMEOUT=0
