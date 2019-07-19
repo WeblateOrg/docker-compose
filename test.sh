@@ -18,6 +18,7 @@ services:
 EOT
 
 echo "Starting up containers..."
+export COMPOSE_PROJECT_NAME=wl
 docker-compose up -d || exit 1
 docker-compose ps
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
