@@ -24,7 +24,7 @@ docker-compose ps
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 docker inspect $CONTAINER
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
-PORT=$(docker inspect --format='{{.Config.ExposedPorts}}' $CONTAINER | tr -d -c 0-9)
+PORT=8080
 
 echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
 TIMEOUT=0
