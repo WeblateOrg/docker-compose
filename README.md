@@ -18,6 +18,8 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
     version: '3'
     services:
       weblate:
+        ports:
+          - 80:8080
         environment:
           - WEBLATE_EMAIL_HOST=smtp.example.com
           - WEBLATE_EMAIL_HOST_USER=user
