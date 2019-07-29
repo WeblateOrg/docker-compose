@@ -21,11 +21,11 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
         ports:
           - 80:8080
         environment:
-          - WEBLATE_EMAIL_HOST=smtp.example.com
-          - WEBLATE_EMAIL_HOST_USER=user
-          - WEBLATE_EMAIL_HOST_PASSWORD=pass
-          - WEBLATE_ALLOWED_HOSTS=your hosts
-          - WEBLATE_ADMIN_PASSWORD=password for admin user
+          WEBLATE_EMAIL_HOST: smtp.example.com
+          WEBLATE_EMAIL_HOST_USER: user
+          WEBLATE_EMAIL_HOST_PASSWORD: pass
+          WEBLATE_ALLOWED_HOSTS: your hosts
+          WEBLATE_ADMIN_PASSWORD: password for admin user
     ```
 
 2. Build the instances
