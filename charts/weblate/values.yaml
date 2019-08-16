@@ -1,0 +1,99 @@
+host: weblate.example.com
+env: {}
+
+postgres:
+  host: db.example.com
+  user: weblate
+  password: password
+  database: weblate
+
+email:
+  host: smtp.example.com
+  user: weblate
+  password: password
+  from: weblate@example.com
+
+image:
+  repository: weblate/weblate
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  loadBalancerIP: ~
+  externalTrafficPolicy: ~
+  cdn: false
+  neg: true
+  timeoutSec: 120
+
+ingress:
+  enabled: false
+  ip: ~
+  class: gce
+  certificateArn: ~
+  sslRedirect: false
+  sslPolicy: ELBSecurityPolicy-TLS-1-2-2017-01
+
+certificates:
+  enabled: false
+  issuer: letsencrypt-prod
+  kind: ClusterIssuer
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  storageClass: ~
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+pdb:
+  enabled: false
+  maxUnavailable: 0
+
+vpa:
+  enabled: false
+  updateMode: 'Off'
+
+redis:
+  enabled: true
+  host: ~
+  image:
+    repository: redis
+    tag: 5-alpine
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 5Gi
+    storageClass: ~
+  resources: {}
+  tolerations: []
+  affinity: {}
+  pdb:
+    enabled: false
+    maxUnavailable: 0
+  vpa:
+    enabled: false
+    updateMode: 'Off'

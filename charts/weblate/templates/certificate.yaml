@@ -1,0 +1,15 @@
+{{- if .Values.certificates.enabled -}}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: {{ include "weblate.fullname" . }}
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+spec:
+  secretName: {{ include "weblate.fullname" . }}-tls
+  issuerRef:
+    name: {{ .Values.certificates.issuer }}
+    kind: {{ .Values.certificates.kind }}
+  dnsNames:
+    - {{ .Values.host }}
+{{- end }}

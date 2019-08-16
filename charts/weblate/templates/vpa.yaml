@@ -1,0 +1,15 @@
+{{- if .Values.vpa.enabled }}
+apiVersion: autoscaling.k8s.io/v1beta2
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ include "weblate.fullname" . }}
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: {{ include "weblate.fullname" . }}
+  updatePolicy:
+    updateMode: {{ .Values.vpa.updateMode | quote }}
+{{- end }}

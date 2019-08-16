@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "weblate.fullname" . }}
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+  annotations:
+    {{- if .Values.ingress.enabled }}
+    {{- if and (eq .Values.ingress.class "gce") (or .Values.service.timeoutSec .Values.service.cdn) }}
+    beta.cloud.google.com/backend-config: '{"ports": {"http":"{{ include "weblate.fullname" . }}"}}'
+    {{- end }}
+    {{- if .Values.service.neg }}
+    cloud.google.com/neg: '{"ingress": true}'
+    {{- end }}
+    {{- end }}
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    alb.ingress.kubernetes.io/healthcheck-path: /server_ping
+spec:
+  type: {{ .Values.service.type | quote }}
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "weblate.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: weblate

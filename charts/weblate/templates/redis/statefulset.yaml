@@ -1,0 +1,72 @@
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "weblate.fullname" . }}-redis
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "weblate.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: redis
+  serviceName: {{ include "weblate.fullname" . }}-redis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "weblate.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: redis
+    spec:
+      containers:
+        - name: redis
+          image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy | quote }}
+          args:
+            - redis-server
+            - --maxmemory 1gb
+            - --maxmemory-policy volatile-lru
+            {{- if .Values.redis.persistence.enabled }}
+            - --appendonly yes
+            - --save 60 1000
+            {{- end }}
+          ports:
+            - name: redis
+              containerPort: 6379
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: ["redis-cli", "ping"]
+          readinessProbe:
+            exec:
+              command: ["redis-cli", "ping"]
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+          resources:
+{{ toYaml .Values.redis.resources | indent 12 }}
+      initContainers:
+        - name: disable-thp
+          image: busybox
+          command: ["sh", "-c", "echo never >/host-sys/kernel/mm/transparent_hugepage/enabled"]
+          volumeMounts:
+            - name: host-sys
+              mountPath: /host-sys
+      volumes:
+        - name: redis-data
+          {{- if .Values.redis.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "weblate.fullname" . }}-redis
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        - name: host-sys
+          hostPath:
+            path: /sys
+      tolerations:
+{{ toYaml .Values.redis.tolerations | indent 8 }}
+      affinity:
+{{ toYaml .Values.redis.affinity | indent 8 }}
+{{- end }}

@@ -1,0 +1,16 @@
+{{- if and .Values.redis.enabled .Values.redis.pdb.enabled }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "weblate.fullname" . }}-redis
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  maxUnavailable: {{ .Values.redis.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "weblate.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: redis
+{{- end }}

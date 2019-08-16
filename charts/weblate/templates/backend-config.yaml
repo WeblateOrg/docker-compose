@@ -1,0 +1,22 @@
+{{- if and .Values.ingress.enabled (eq .Values.ingress.class "gce") }}
+{{- if or .Values.service.timeoutSec .Values.service.cdn }}
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ include "weblate.fullname" . }}
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+spec:
+  {{- if .Values.service.timeoutSec }}
+  timeoutSec: {{ .Values.service.timeoutSec }}
+  {{- end }}
+  {{- if .Values.service.cdn }}
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: true
+  {{- end }}
+{{- end }}
+{{- end }}

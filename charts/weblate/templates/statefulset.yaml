@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "weblate.fullname" . }}
+  labels:
+{{ include "weblate.labels" . | indent 4 }}
+spec:
+  serviceName: {{ include "weblate.fullname" . }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "weblate.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: weblate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "weblate.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: weblate
+      annotations:
+        checksum/weblate: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum | quote }}
+    spec:
+      containers:
+        - name: weblate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: WEBLATE_ALLOWED_HOSTS
+              value: {{ .Values.host }},*
+            - name: WEBLATE_DEBUG
+              value: "0"
+            - name: WEBLATE_LOGLEVEL
+              value: "INFO"
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "weblate.fullname" . }}
+                  key: postgres_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "weblate.fullname" . }}
+                  key: postgres_password
+            - name: POSTGRES_DATABASE
+              value: {{ .Values.postgres.database | quote }}
+            - name: REDIS_HOST
+              {{- if and .Values.redis.enabled }}
+              value: {{ include "weblate.fullname" . }}-redis
+              {{- else }}
+              value: {{ .Values.redis.host | quote }}
+              {{- end }}
+            - name: WEBLATE_EMAIL_HOST
+              value: {{ .Values.email.host | quote}}
+            - name: WEBLATE_EMAIL_HOST_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "weblate.fullname" . }}
+                  key: email_user
+            - name: WEBLATE_EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "weblate.fullname" . }}
+                  key: email_password
+            - name: WEBLATE_SERVER_EMAIL
+              value: {{ .Values.email.from | quote }}
+            - name: WEBLATE_DEFAULT_FROM_EMAIL
+              value: {{ .Values.email.from | quote }}
+            {{- range $key,$value := .Values.env }}
+            - name: {{ $key | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "weblate.fullname" $ }}
+                  key: {{ $key | lower | quote }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz/
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /healthz/
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+            periodSeconds: 30
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "weblate.fullname" . }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
