@@ -12,6 +12,7 @@ services:
       - cache
     environment:
       WEBLATE_ENABLE_HTTPS: 1
+      WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
   database:
     image: postgres:9.6-alpine
     env_file:
