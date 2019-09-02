@@ -25,19 +25,20 @@ CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 docker inspect $CONTAINER
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
 PORT=8080
+PROTO=http
 
 echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
 TIMEOUT=0
-while ! curl --fail --silent --output /dev/null "http://$IP:$PORT/" ; do
+while ! curl --insecure --fail --silent --output /dev/null "$PROTO://$IP:$PORT/" ; do
     sleep 1
     TIMEOUT=$(($TIMEOUT + 1))
     if [ $TIMEOUT -gt 60 ] ; then
         break
     fi
 done
-curl --verbose --fail "http://$IP:$PORT/about/" | grep 'Powered by.*Weblate'
+curl --insecure --verbose --fail "$PROTO://$IP:$PORT/about/" | grep 'Powered by.*Weblate'
 RET=$?
-curl --verbose --fail --output /dev/null "http://$IP:$PORT/static/weblate-128.png"
+curl --insecure --verbose --fail --output /dev/null "$PROTO://$IP:$PORT/static/weblate-128.png"
 RET2=$?
 # Display logs so far
 docker-compose logs
