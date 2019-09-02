@@ -28,7 +28,7 @@ PORT=${1:-8080}
 PROTO=${2:-http}
 TESTS=${3:-yes}
 
-echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
+echo "Checking '$CONTAINER': $PROTO://$IP:$PORT/"
 TIMEOUT=0
 while ! curl --insecure --fail --silent --output /dev/null "$PROTO://$IP:$PORT/" ; do
     sleep 1
