@@ -24,8 +24,9 @@ docker-compose ps
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
 docker inspect $CONTAINER
 IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER`
-PORT=8080
-PROTO=http
+PORT=${1:-8080}
+PROTO=${2:-http}
+TESTS=${3:-yes}
 
 echo "Checking '$CONTAINER', IP address '$IP', Port '$PORT'"
 TIMEOUT=0
@@ -62,12 +63,14 @@ docker-compose exec --user weblate weblate weblate createadmin || exit 1
 echo "Supervisor status:"
 docker-compose exec weblate supervisorctl status all || exit 1
 
+if [ $TESTS = yes ] ; then
 echo "Running testsuite..."
 docker-compose exec --user weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate collectstatic --noinput
 docker-compose exec --user weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate test --noinput weblate.accounts weblate.trans weblate.lang weblate.api weblate.gitexport weblate.screenshots weblate.utils weblate.machinery weblate.auth weblate.formats weblate.fonts weblate.addons weblate.wladmin weblate.vcs
 if [ $? -ne 0 ] ; then
     docker-compose logs
     exit 1
+fi
 fi
 
 echo "Shutting down containers..."
