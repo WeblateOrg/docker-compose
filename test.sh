@@ -58,7 +58,7 @@ docker-compose exec \
     weblate weblate check --deploy || exit 1
 
 echo "Creating admin..."
-docker-compose exec --user weblate weblate weblate createadmin || exit 1
+docker-compose exec --user weblate weblate weblate createadmin --update || exit 1
 
 echo "Supervisor status:"
 docker-compose exec weblate supervisorctl status all || exit 1
