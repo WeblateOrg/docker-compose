@@ -1,6 +1,7 @@
 # weblate-docker-compose
 
 [![Build Status](https://travis-ci.com/WeblateOrg/docker-compose.svg?branch=master)](https://travis-ci.com/WeblateOrg/docker-compose)
+[![Documenation](https://img.shields.io/readthedocs/weblate.svg)](https://docs.weblate.org/en/latest/admin/install/docker.html)
 
 The docker-compose for Docker container for Weblate
 
@@ -8,7 +9,7 @@ The docker-compose for Docker container for Weblate
 
 Detailed documentation is available in Weblate documentation:
 
-https://docs.weblate.org/en/latest/admin/deployments.html#docker
+https://docs.weblate.org/en/latest/admin/install/docker.html
 
 ## Getting started
 
@@ -36,7 +37,7 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
 
         docker-compose up
 
-4. For more detailed instructions visit https://docs.weblate.org/en/latest/admin/deployments.html#docker
+4. For more detailed instructions visit https://docs.weblate.org/en/latest/admin/install/docker.html
 
 ## Rebuilding the weblate docker image
 
