@@ -55,7 +55,7 @@ docker-compose exec -T weblate pip3 list
 echo "Deploy checks:"
 docker-compose exec -T \
     --user weblate \
-    --env WEBLATE_SILENCED_SYSTEM_CHECKS=weblate.E003,weblate.E017,security.W004,security.W008,security.W012,security.W018,weblate.I021 \
+    --env WEBLATE_SILENCED_SYSTEM_CHECKS=weblate.E003,weblate.E017,security.W004,security.W008,security.W012,security.W018,weblate.I021,weblate.E016,weblate.I028 \
     weblate weblate check --deploy || exit 1
 
 echo "Creating admin..."
