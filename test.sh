@@ -20,8 +20,6 @@ EOT
 echo "Starting up containers..."
 # Use short project name, otherwise inspect output is messy
 export COMPOSE_PROJECT_NAME=wl
-# Seems needed on GitHub Actions
-export COMPOSE_INTERACTIVE_NO_CLI=1
 docker-compose up -d || exit 1
 docker-compose ps
 CONTAINER=`docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//'`
