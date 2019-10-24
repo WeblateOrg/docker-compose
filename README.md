@@ -16,7 +16,7 @@ https://docs.weblate.org/en/latest/admin/install/docker.html
 1. Create a `docker-compose.override.yml` file with your settings.
 
     ```yml
-    version: '3'
+    version: '2'
     services:
       weblate:
         ports:
