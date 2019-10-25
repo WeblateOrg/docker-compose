@@ -10,7 +10,7 @@
 # test them.
 
 cat >>docker-compose.override.yml <<EOT
-version: '3'
+version: '2'
 services:
   weblate:
     environment:
