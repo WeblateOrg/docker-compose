@@ -66,8 +66,8 @@ docker-compose exec -T weblate supervisorctl status all || exit 1
 
 if [ $TESTS = yes ] ; then
 echo "Running testsuite..."
-docker-compose exec -T --user weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate collectstatic --noinput
-docker-compose exec -T --user weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate test --noinput weblate.accounts weblate.trans weblate.lang weblate.api weblate.gitexport weblate.screenshots weblate.utils weblate.machinery weblate.auth weblate.formats weblate.fonts weblate.addons weblate.wladmin weblate.vcs
+docker-compose exec -T --user weblate --env CI_DATABASE=postgresql --env CI_DB_HOST=database --env CI_DB_NAME=weblate --env CI_DB_USER=weblate --env CI_DB_PASSWORD=weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate collectstatic --noinput
+docker-compose exec -T --user weblate --env CI_DATABASE=postgresql --env CI_DB_HOST=database --env CI_DB_NAME=weblate --env CI_DB_USER=weblate --env CI_DB_PASSWORD=weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate test --noinput weblate.accounts weblate.trans weblate.lang weblate.api weblate.gitexport weblate.screenshots weblate.utils weblate.machinery weblate.auth weblate.formats weblate.fonts weblate.addons weblate.wladmin weblate.vcs
 if [ $? -ne 0 ] ; then
     docker-compose logs
     exit 1
