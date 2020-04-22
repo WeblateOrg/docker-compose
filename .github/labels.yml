@@ -23,3 +23,42 @@
 - color: ffffff
   name: wontfix
   description: This will not be worked on
+# Bountysource
+- color: 129e5e
+  name: bounty
+  description: There is a bounty on the issue
+# Dependabot
+- color: 0025ff
+  name: dependencies
+  description: Pull requests that update a dependency file
+- color: 2b67c6
+  name: python
+  description: Pull requests that update Python code
+- color: '168700'
+  name: javascript
+  description: Pull requests that update Javascript code
+- color: ee0701
+  name: security
+  description: Pull requests that address a security vulnerability
+# Weblate specific
+- color: 87a2f2
+  name: backlog
+  description: This is currently not on the roadmap
+- color: 0075ca
+  name: documentation
+  description: Improvements or additions to documentation
+- color: d4c5f9
+  name: hosted
+  description: Issues affecting Hosted Weblate service
+- color: e3f49c
+  name: naming
+  description: Discussions about naming certain features
+- color: fef2c0
+  name: translate-toolkit
+  description: Issues which need to be fixed in the translate-toolkit
+- color: 02d7e1
+  name: undecided
+  description: These features might not be implemented at all
+- color: e3f49c
+  name: ux
+  description: User experience issues
