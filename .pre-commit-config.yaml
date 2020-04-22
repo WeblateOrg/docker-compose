@@ -7,6 +7,7 @@ repos:
   - id: trailing-whitespace
   - id: end-of-file-fixer
   - id: check-yaml
+  - id: requirements-txt-fixer
   - id: check-merge-conflict
   - id: mixed-line-ending
     args: [--fix=lf]
