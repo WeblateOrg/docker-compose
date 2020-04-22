@@ -62,7 +62,7 @@ echo "Creating admin..."
 docker-compose exec -T --user weblate weblate weblate createadmin --update || exit 1
 
 echo "Supervisor status:"
-docker-compose exec -T weblate supervisorctl status all || exit 1
+docker-compose exec -T weblate supervisorctl status all || docker-compose logs && exit 1
 
 if [ $TESTS = yes ] ; then
 echo "Running testsuite..."
