@@ -62,7 +62,13 @@ echo "Creating admin..."
 docker-compose exec -T --user weblate weblate weblate createadmin --update || exit 1
 
 echo "Supervisor status:"
-docker-compose exec -T weblate supervisorctl status all || docker-compose logs && exit 1
+docker-compose exec -T weblate supervisorctl status all
+RET=$?
+# The 3 happens with EXITED check and supervisor 4
+if [ $RET -ne 0 -a $RET -ne 3 ] ; then
+    docker-compose logs
+    exit 1
+fi
 
 if [ $TESTS = yes ] ; then
 echo "Running testsuite..."
