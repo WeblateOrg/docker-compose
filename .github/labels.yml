@@ -40,6 +40,10 @@
 - color: ee0701
   name: security
   description: Pull requests that address a security vulnerability
+# Hacktoberfest
+- color: 129e5e
+  name: hacktoberfest
+  description: This is good for Hacktoberfest
 # Weblate specific
 - color: 87a2f2
   name: backlog
