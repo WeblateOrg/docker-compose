@@ -3,41 +3,41 @@ services:
   weblate:
     image: weblate/weblate
     volumes:
-      - weblate-data:/app/data
+    - weblate-data:/app/data
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
+    - database
+    - cache
     environment:
       WEBLATE_ENABLE_HTTPS: 1
       WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
   database:
     image: postgres:11-alpine
     env_file:
-      - ./environment
+    - ./environment
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+    - postgres-data:/var/lib/postgresql/data
     restart: always
   cache:
     image: redis:4-alpine
     restart: always
-    command: ["redis-server", "--appendonly", "yes"]
+    command: [redis-server, --appendonly, yes]
     volumes:
-      - redis-data:/data
+    - redis-data:/data
   https-portal:
     image: steveltn/https-portal:1
     ports:
-      - '80:80'
-      - '443:443'
+    - 80:80
+    - 443:443
     restart: always
     environment:
       STAGE: production
       PROXY_READ_TIMEOUT: 3600
       CLIENT_MAX_BODY_SIZE: 100M
     volumes:
-      - ssl-certs:/var/lib/https-portal
+    - ssl-certs:/var/lib/https-portal
 volumes:
   weblate-data: {}
   postgres-data: {}
