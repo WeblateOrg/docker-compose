@@ -9,7 +9,7 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
-cat >>docker-compose.override.yml <<EOT
+cat > docker-compose.override.yml <<EOT
 version: '3'
 services:
   weblate:
