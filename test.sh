@@ -9,6 +9,11 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
+if [[ ! -x `which docker-compose` ]] ; then
+    echo "Install docker first" >&2;
+    exit 1;
+fi
+
 cat > docker-compose.override.yml <<EOT
 version: '3'
 services:
