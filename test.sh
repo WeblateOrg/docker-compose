@@ -18,6 +18,7 @@ cat > docker-compose.override.yml <<EOT
 version: '3'
 services:
   weblate:
+    image: ${TEST_CONTAINER:-weblate/weblate:latest}
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
 EOT
