@@ -23,6 +23,10 @@ services:
       WEBLATE_TIME_ZONE: Europe/Prague
 EOT
 
+if [ "$GENERATE_ONLY" = yes ] ; then
+    exit 0
+fi
+
 echo "Starting up containers..."
 # Use short project name, otherwise inspect output is messy
 export COMPOSE_PROJECT_NAME=wl
