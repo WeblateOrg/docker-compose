@@ -9,7 +9,7 @@
 # Execute in docker-compose.yml directory, it will create containers and
 # test them.
 
-if [[ ! -x `which docker-compose` ]] ; then
+if [ ! -x `which docker-compose` ] ; then
     echo "Install docker first" >&2;
     exit 1;
 fi
