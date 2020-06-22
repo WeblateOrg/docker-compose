@@ -80,6 +80,9 @@ if [ $RET -ne 0 -a $RET -ne 3 ] ; then
     exit 1
 fi
 
+echo "SAML certificate:"
+docker-compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout || exit 1
+
 if [ $TESTS = yes ] ; then
 echo "Running testsuite..."
 docker-compose exec -T --user weblate --env CI_DATABASE=postgresql --env CI_DB_HOST=database --env CI_DB_NAME=weblate --env CI_DB_USER=weblate --env CI_DB_PASSWORD=weblate --env DJANGO_SETTINGS_MODULE=weblate.settings_test weblate weblate collectstatic --noinput
