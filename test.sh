@@ -21,6 +21,7 @@ services:
     image: ${TEST_CONTAINER:-weblate/weblate:latest}
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
+      WEBLATE_SITE_DOMAIN: example.com
 EOT
 
 if [ "$GENERATE_ONLY" = yes ] ; then
