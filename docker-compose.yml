@@ -11,7 +11,7 @@ services:
       - database
       - cache
   database:
-    image: postgres:11-alpine
+    image: postgres:12-alpine
     env_file:
       - ./environment
     volumes:
