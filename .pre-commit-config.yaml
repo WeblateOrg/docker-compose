@@ -20,6 +20,6 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
   - repo: https://github.com/prettier/prettier
-    rev: 2.0.5
+    rev: 2.1.1
     hooks:
       - id: prettier
