@@ -40,6 +40,10 @@ PORT=${1:-8080}
 PROTO=${2:-http}
 TESTS=${3:-yes}
 
+sed -i "s/WEBLATE_SITE_DOMAIN.*/WEBLATE_SITE_DOMAIN: $IP:$PORT/" docker-compose.override.yml
+docker compose down
+docker-compose up -d || exit 1
+
 echo "Checking '$CONTAINER': $PROTO://$IP:$PORT/"
 TIMEOUT=0
 while ! curl --insecure --fail --silent --output /dev/null "$PROTO://$IP:$PORT/" ; do
