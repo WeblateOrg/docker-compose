@@ -2,4 +2,4 @@
 docker-compose ps
 docker-compose exec -T \
     --user weblate \
-    /app/bin/health_check
+    weblate /app/bin/health_check
