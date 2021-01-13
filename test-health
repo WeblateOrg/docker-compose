@@ -1,0 +1,4 @@
+#!/bin/sh
+docker-compose exec -T \
+    --user weblate \
+    /app/bin/health_check

@@ -21,6 +21,8 @@ jobs:
         run: ./test-inspect
       - name: Check service is running
         run: ./test-online
+      - name: Check service health status
+        run: ./test-health
       - name: Run Django Checks
         run: ./test-checks
       - name: Verify supervisor
