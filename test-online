@@ -1,10 +1,11 @@
 #!/bin/sh
+# shellcheck disable=SC1091
 . ./.test.env
 echo "Checking $URL..."
 TIMEOUT=0
 while ! curl --insecure --fail --max-time 5 --silent --output /dev/null "$URL" ; do
     sleep 1
-    TIMEOUT=$(($TIMEOUT + 1))
+    TIMEOUT=$((TIMEOUT + 1))
     if [ $TIMEOUT -gt 60 ] ; then
         break
     fi
@@ -16,6 +17,6 @@ RET2=$?
 # Display logs so far
 docker-compose logs
 
-if [ $RET2 -ne 0 -o $RET -ne 0 ] ; then
+if [ $RET2 -ne 0 ] || [ $RET -ne 0 ] ; then
     exit 1
 fi
