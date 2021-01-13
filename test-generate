@@ -1,0 +1,21 @@
+#!/bin/sh
+cat > docker-compose.override.yml <<EOT
+version: '3'
+services:
+  weblate:
+    image: ${TEST_CONTAINER:-weblate/weblate:latest}
+    environment:
+      WEBLATE_TIME_ZONE: Europe/Prague
+      WEBLATE_SITE_DOMAIN: test.example.com
+    ports:
+      - 8080:8080
+      - 4443:4443
+EOT
+
+IP=127.0.0.1
+PORT=${1:-8080}
+PROTO=${2:-http}
+
+cat > .test.env <<EOT
+URL=$PROTO://$IP:$PORT/
+EOT

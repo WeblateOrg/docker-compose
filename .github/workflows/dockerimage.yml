@@ -5,9 +5,31 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      # Use short project name, otherwise inspect output is messy
+      COMPOSE_PROJECT_NAME: wl
 
     steps:
       - uses: actions/checkout@v2
-      - name: Test the Docker image
-        run: |
-          ./test.sh
+      - name: Generate configuration
+        run: ./test-generate
+      - name: Startup container
+        run: ./test-boot
+      - name: List Python packages
+        run: ./test-pip
+      - name: Inspect container
+        run: ./test-inspect
+      - name: Check service is running
+        run: ./test-online
+      - name: Run Django Checks
+        run: ./test-checks
+      - name: Verify supervisor
+        run: ./test-supervisor
+      - name: Test admin creation
+        run: ./test-admin
+      - name: Verify SAML certificate
+        run: ./test-saml
+      - name: Run tests
+        run: ./test-tests
+      - name: Shutdown service
+        run: ./test-stop
