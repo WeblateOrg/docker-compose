@@ -12,6 +12,19 @@ services:
       - 4443:4443
 EOT
 
+if [ -n "$3" ] ; then
+  for service in celery-backup celery-beat celery-celery celery-memory celery-notify celery-translate ; do
+    cat >> docker-compose.override.yml <<EOT
+  weblate-${service}:
+    image: ${TEST_CONTAINER:-weblate/weblate:latest}
+    environment:
+      WEBLATE_TIME_ZONE: Europe/Prague
+      WEBLATE_SITE_DOMAIN: test.example.com
+EOT
+  done
+fi
+
+
 IP=127.0.0.1
 PORT=${1:-8080}
 PROTO=${2:-http}
