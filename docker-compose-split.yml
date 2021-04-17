@@ -22,6 +22,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   weblate-celery-beat:
@@ -34,6 +35,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   weblate-celery-celery:
@@ -46,6 +48,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   weblate-celery-memory:
@@ -58,6 +61,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   weblate-celery-notify:
@@ -70,6 +74,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   weblate-celery-translate:
@@ -82,6 +87,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate
     environment:
       WEBLATE_SERVICES: uwsgi nginx
   database:
