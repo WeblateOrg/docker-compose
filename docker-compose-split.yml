@@ -11,7 +11,7 @@ services:
       - database
       - cache
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   weblate-celery-backup:
     image: weblate/weblate
     volumes:
@@ -24,7 +24,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   weblate-celery-beat:
     image: weblate/weblate
     volumes:
@@ -37,7 +37,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   weblate-celery-celery:
     image: weblate/weblate
     volumes:
@@ -50,7 +50,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   weblate-celery-memory:
     image: weblate/weblate
     volumes:
@@ -63,7 +63,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: web
   weblate-celery-notify:
     image: weblate/weblate
     volumes:
@@ -76,7 +76,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   weblate-celery-translate:
     image: weblate/weblate
     volumes:
@@ -89,7 +89,7 @@ services:
       - cache
       - weblate
     environment:
-      WEBLATE_SERVICES: uwsgi nginx
+      WEBLATE_SERVICE: uwsgi nginx
   database:
     image: postgres:13-alpine
     env_file:
