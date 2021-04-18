@@ -10,6 +10,7 @@ services:
     depends_on:
       - database
       - cache
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: web
   weblate-celery-backup:
@@ -22,7 +23,6 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
     environment:
       WEBLATE_SERVICE: celery-backup
   weblate-celery-beat:
@@ -35,7 +35,7 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-beat
   weblate-celery-celery:
@@ -48,7 +48,7 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-celery
   weblate-celery-memory:
@@ -61,7 +61,7 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-memory
   weblate-celery-notify:
@@ -74,7 +74,7 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-notify
   weblate-celery-translate:
@@ -87,7 +87,7 @@ services:
     depends_on:
       - database
       - cache
-      - weblate
+      - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-translate
   database:
