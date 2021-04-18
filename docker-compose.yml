@@ -2,6 +2,8 @@ version: "3"
 services:
   weblate:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:

@@ -2,6 +2,8 @@ version: "3"
 services:
   weblate:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -15,6 +17,8 @@ services:
       WEBLATE_SERVICE: web
   weblate-celery-backup:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -27,6 +31,8 @@ services:
       WEBLATE_SERVICE: celery-backup
   weblate-celery-beat:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -40,6 +46,8 @@ services:
       WEBLATE_SERVICE: celery-beat
   weblate-celery-celery:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -53,6 +61,8 @@ services:
       WEBLATE_SERVICE: celery-celery
   weblate-celery-memory:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -66,6 +76,8 @@ services:
       WEBLATE_SERVICE: celery-memory
   weblate-celery-notify:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
@@ -79,6 +91,8 @@ services:
       WEBLATE_SERVICE: celery-notify
   weblate-celery-translate:
     image: weblate/weblate
+    tmpfs:
+      - /app/cache
     volumes:
       - weblate-data:/app/data
     env_file:
