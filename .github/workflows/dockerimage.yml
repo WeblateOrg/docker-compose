@@ -10,7 +10,7 @@ jobs:
       COMPOSE_PROJECT_NAME: wl
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - name: Generate configuration
         run: ./test-generate
       - name: Startup container
