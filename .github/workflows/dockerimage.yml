@@ -8,6 +8,7 @@ jobs:
     env:
       # Use short project name, otherwise inspect output is messy
       COMPOSE_PROJECT_NAME: wl
+      TEST_EXTRA_ENV: "WEBLATE_SAML_IDP_URL: https://example.com/idp"
 
     steps:
       - uses: actions/checkout@v2.3.4
