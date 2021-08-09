@@ -24,3 +24,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON_ISORT: "false"
           VALIDATE_JSCPD: "false"
+          VALIDATE_GITHUB_ACTIONS: "false"
