@@ -29,6 +29,7 @@ Getting started
         version: '3'
         services:
           weblate:
+            image: weblate/weblate
             ports:
               - 80:8080
             environment:
