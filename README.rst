@@ -22,7 +22,14 @@ https://docs.weblate.org/en/latest/admin/install/docker.html
 Getting started
 ---------------
 
-1. Create a `docker-compose.override.yml` file with your settings.
+1. Clone the docker-compose repository:
+
+   .. code-block:: shell
+
+      git clone https://github.com/WeblateOrg/docker-compose.git
+      cd docker-compose
+
+2. Create a ``docker-compose.override.yml`` file with your settings.
 
    .. code-block:: yml
 
@@ -38,15 +45,13 @@ Getting started
               WEBLATE_ALLOWED_HOSTS: your hosts
               WEBLATE_ADMIN_PASSWORD: password for admin user
 
-2. Build the instances
+3. Start it up:
 
-        docker-compose build
-
-3. Start up
+   .. code-block:: shell
 
         docker-compose up
 
-4. For more detailed instructions visit https://docs.weblate.org/en/latest/admin/install/docker.html
+5. For more detailed instructions and configuration visit https://docs.weblate.org/en/latest/admin/install/docker.html
 
 Rebuilding the weblate docker image
 -----------------------------------
