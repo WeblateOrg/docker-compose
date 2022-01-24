@@ -5,7 +5,9 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
     env_file:
       - ./environment
     restart: always
@@ -20,7 +22,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
@@ -34,7 +40,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
@@ -48,7 +58,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
@@ -63,7 +77,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
@@ -78,7 +96,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
@@ -93,7 +115,11 @@ services:
     tmpfs:
       - /app/cache
     volumes:
-      - weblate-data:/app/data
+      - type: volume
+        source: weblate-data
+        target: /app/data
+        volume:
+          nocopy: true
     env_file:
       - ./environment
     restart: always
