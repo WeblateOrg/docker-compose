@@ -1,147 +1,147 @@
-version: "3"
+version: '3'
 services:
   weblate:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
+    - type: volume
+      source: weblate-data
+      target: /app/data
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
-      - weblate-celery-beat
+    - database
+    - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: web
   weblate-celery-backup:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
+    - database
+    - cache
     environment:
       WEBLATE_SERVICE: celery-backup
   weblate-celery-beat:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
+    - database
+    - cache
     environment:
       WEBLATE_SERVICE: celery-beat
   weblate-celery-celery:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
-      - weblate-celery-beat
+    - database
+    - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-celery
   weblate-celery-memory:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
-      - weblate-celery-beat
+    - database
+    - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-memory
   weblate-celery-notify:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
-      - weblate-celery-beat
+    - database
+    - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-notify
   weblate-celery-translate:
     image: weblate/weblate
     tmpfs:
-      - /app/cache
+    - /app/cache
     volumes:
-      - type: volume
-        source: weblate-data
-        target: /app/data
-        volume:
-          nocopy: true
+    - type: volume
+      source: weblate-data
+      target: /app/data
+      volume:
+        nocopy: true
     env_file:
-      - ./environment
+    - ./environment
     restart: always
     depends_on:
-      - database
-      - cache
-      - weblate-celery-beat
+    - database
+    - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-translate
   database:
     image: postgres:13-alpine
     env_file:
-      - ./environment
+    - ./environment
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+    - postgres-data:/var/lib/postgresql/data
     restart: always
   cache:
     image: redis:6-alpine
     restart: always
-    command: ["redis-server", "--appendonly", "yes"]
+    command: [redis-server, --appendonly, yes]
     volumes:
-      - redis-data:/data
+    - redis-data:/data
 volumes:
   weblate-data: {}
   postgres-data: {}
