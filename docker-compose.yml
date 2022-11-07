@@ -13,7 +13,7 @@ services:
     - database
     - cache
   database:
-    image: postgres:14-alpine
+    image: postgres:15-alpine
     env_file:
     - ./environment
     volumes:
