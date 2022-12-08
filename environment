@@ -2,8 +2,8 @@
 # https://docs.weblate.org/en/latest/admin/deployments.html#docker
 
 # Weblate setup
-WEBLATE_DEBUG=1
-WEBLATE_LOGLEVEL=DEBUG
+WEBLATE_DEBUG=0
+WEBLATE_LOGLEVEL=INFO
 WEBLATE_SITE_TITLE=Weblate
 WEBLATE_ADMIN_NAME=Weblate Admin
 WEBLATE_ADMIN_EMAIL=weblate@example.com
