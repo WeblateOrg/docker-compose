@@ -4,6 +4,7 @@ services:
     image: weblate/weblate
     volumes:
     - weblate-data:/app/data
+    - weblate-cache:/app/cache
     env_file:
     - ./environment
     restart: always
@@ -39,6 +40,7 @@ services:
     volumes:
     - ssl-certs:/var/lib/https-portal
 volumes:
+  weblate-cache: {}
   weblate-data: {}
   postgres-data: {}
   redis-data: {}
