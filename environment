@@ -1,5 +1,5 @@
 # See Weblate documentation for detailed description:
-# https://docs.weblate.org/en/latest/admin/deployments.html#docker
+# https://docs.weblate.org/en/latest/admin/install/docker.html#generic-settings
 
 # Weblate setup
 WEBLATE_DEBUG=0
