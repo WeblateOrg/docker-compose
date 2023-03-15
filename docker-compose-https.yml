@@ -36,7 +36,6 @@ services:
     environment:
       STAGE: production
       PROXY_READ_TIMEOUT: 3600
-      CLIENT_MAX_BODY_SIZE: 100M
     volumes:
     - ssl-certs:/var/lib/https-portal
 volumes:
