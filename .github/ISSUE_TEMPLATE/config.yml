@@ -5,12 +5,12 @@
 # This file is maintained in https://github.com/WeblateOrg/meta/
 # and generated using update-issue-config there.
 contact_links:
-- name: Read our clear, thorough and localized Docs
+- name: Read our clear, thorough and localized docs
   url: https://docs.weblate.org/
   about: Save your time! There is an instant solution for many issues in the docs appreciated by numerous users. And it might be in your preferred language.
-- name: Get Professional support
+- name: Get professional support
   url: https://weblate.org/support/
   about: As a subscriber, you will always receive fast and helpful replies from our dedicated support team. More responsible and faster for your business, also makes Weblate stronger.
-- name: Ask a Question
+- name: Ask a question
   url: https://github.com/WeblateOrg/weblate/discussions
   about: Want to discuss something with a community? Do it in discussions!
