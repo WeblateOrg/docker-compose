@@ -34,5 +34,8 @@ jobs:
       run: ./test-saml
     - name: Run tests
       run: ./test-tests
+    - name: Run tests
+      run: ./test-logs
+      if: always()
     - name: Shutdown service
       run: ./test-stop
