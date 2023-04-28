@@ -32,6 +32,8 @@ jobs:
       run: ./test-admin
     - name: Verify SAML certificate
       run: ./test-saml
+    - name: Run commands
+      run: ./test-commands
     - name: Run tests
       run: ./test-tests
     - name: Display logs

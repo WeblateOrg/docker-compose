@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+docker-compose exec -T \
+    --user weblate \
+    weblate tesseract --list-langs
+docker-compose exec -T \
+    --user weblate \
+    weblate licensee --help
