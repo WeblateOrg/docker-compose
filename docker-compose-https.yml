@@ -15,7 +15,7 @@ services:
       WEBLATE_ENABLE_HTTPS: 1
       WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
   database:
-    image: postgres:15-alpine
+    image: postgres:15-alpine3.17
     env_file:
     - ./environment
     volumes:
