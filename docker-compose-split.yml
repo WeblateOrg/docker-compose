@@ -130,7 +130,7 @@ services:
     environment:
       WEBLATE_SERVICE: celery-translate
   database:
-    image: postgres:15-alpine3.17
+    image: postgres:15-alpine
     env_file:
     - ./environment
     volumes:
