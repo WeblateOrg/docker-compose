@@ -3,7 +3,7 @@ name: Docker Image CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  read-only:
     runs-on: ubuntu-20.04
     env:
       # Use short project name, otherwise inspect output is messy
@@ -13,7 +13,46 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Generate configuration
-      run: ./test-generate
+      run: ./test-generate 8080 http
+    - name: Startup container
+      run: ./test-boot
+    - name: List Python packages
+      run: ./test-pip
+    - name: Inspect container
+      run: ./test-inspect
+    - name: Check service is running
+      run: ./test-online
+    - name: Check service health status
+      run: ./test-health
+    - name: Run Django Checks
+      run: ./test-checks
+    - name: Verify supervisor
+      run: ./test-supervisor
+    - name: Test admin creation
+      run: ./test-admin
+    - name: Verify SAML certificate
+      run: ./test-saml
+    - name: Run commands
+      run: ./test-commands
+    - name: Run tests
+      run: ./test-tests
+    - name: Display logs
+      run: ./test-logs
+      if: always()
+    - name: Shutdown service
+      run: ./test-stop
+
+  read-write:
+    runs-on: ubuntu-20.04
+    env:
+      # Use short project name, otherwise inspect output is messy
+      COMPOSE_PROJECT_NAME: wl
+      TEST_EXTRA_ENV: 'WEBLATE_SAML_IDP_URL: https://example.com/idp'
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate configuration
+      run: ./test-generate 8080 http read-write
     - name: Startup container
       run: ./test-boot
     - name: List Python packages

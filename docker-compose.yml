@@ -2,12 +2,16 @@ version: '3'
 services:
   weblate:
     image: weblate/weblate
+    tmpfs:
+    - /run
+    - /tmp
     volumes:
     - weblate-data:/app/data
     - weblate-cache:/app/cache
     env_file:
     - ./environment
     restart: always
+    read_only: true
     depends_on:
     - database
     - cache
@@ -21,6 +25,7 @@ services:
   cache:
     image: redis:7-alpine
     restart: always
+    read_only: true
     command: [redis-server, --save, '60', '1']
     volumes:
     - redis-data:/data
