@@ -39,6 +39,7 @@ Getting started
             ports:
               - 80:8080
             environment:
+              WEBLATE_SITE_DOMAIN: example.com
               WEBLATE_EMAIL_HOST: smtp.example.com
               WEBLATE_EMAIL_HOST_USER: user
               WEBLATE_EMAIL_HOST_PASSWORD: pass
