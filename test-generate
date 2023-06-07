@@ -14,6 +14,7 @@ services:
 EOT
 
 if [ "$3" = "split" ] ; then
+  mv docker-compose-split.yml docker-compose.yml
   for service in celery-backup celery-beat celery-celery celery-memory celery-notify celery-translate ; do
     cat >> docker-compose.override.yml <<EOT
   weblate-${service}:
