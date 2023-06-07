@@ -1,2 +1,2 @@
 #!/bin/sh
-docker-compose exec -T weblate pip3 list
+docker-compose exec -T weblate pip3 list --no-cache-dir --disable-pip-version-check
