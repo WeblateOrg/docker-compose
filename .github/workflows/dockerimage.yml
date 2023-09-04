@@ -11,7 +11,7 @@ jobs:
       TEST_EXTRA_ENV: 'WEBLATE_SAML_IDP_URL: https://example.com/idp'
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Generate configuration
       run: ./test-generate 8080 http
     - name: Startup container
@@ -50,7 +50,7 @@ jobs:
       TEST_EXTRA_ENV: 'WEBLATE_SAML_IDP_URL: https://example.com/idp'
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Generate configuration
       run: ./test-generate 8080 http read-write
     - name: Startup container
