@@ -39,6 +39,7 @@ services:
     depends_on:
     - database
     - cache
+    - weblate-celery-beat
     environment:
       WEBLATE_SERVICE: celery-backup
   weblate-celery-beat:
