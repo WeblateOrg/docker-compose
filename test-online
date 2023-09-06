@@ -6,7 +6,7 @@ TIMEOUT=0
 while ! curl --insecure --fail --max-time 5 --silent --output /dev/null "$URL" ; do
     sleep 5
     TIMEOUT=$((TIMEOUT + 1))
-    if [ $TIMEOUT -gt 100 ] ; then
+    if [ $TIMEOUT -gt 1000 ] ; then
         break
     fi
 done
