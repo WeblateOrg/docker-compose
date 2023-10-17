@@ -38,7 +38,6 @@ services:
     - 80:80
     - 443:443
     restart: always
-    read_only: true
     environment:
       STAGE: production
       PROXY_READ_TIMEOUT: 3600
