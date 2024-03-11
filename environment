@@ -46,6 +46,9 @@ POSTGRES_DB=weblate
 POSTGRES_HOST=database
 POSTGRES_PORT=
 
+# TODO: needed for Weblate 5.4.x and older containers
+POSTGRES_DATABASE=weblate
+
 # Cache setup
 # https://docs.weblate.org/en/latest/admin/install.html#production-cache
 REDIS_HOST=cache
