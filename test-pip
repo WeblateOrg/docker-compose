@@ -5,4 +5,4 @@ else
     docker=(docker compose)
 fi
 
-$docker exec -T weblate pip3 list --no-cache-dir --disable-pip-version-check
+${docker[@]} exec -T weblate pip3 list --no-cache-dir --disable-pip-version-check

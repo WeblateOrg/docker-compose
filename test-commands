@@ -6,6 +6,6 @@ else
     docker=(docker compose)
 fi
 
-$docker exec -T \
+${docker[@]} exec -T \
     --user weblate \
     weblate licensee --help

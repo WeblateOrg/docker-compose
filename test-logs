@@ -5,4 +5,4 @@ else
     docker=(docker compose)
 fi
 
-$docker logs
+${docker[@]} logs

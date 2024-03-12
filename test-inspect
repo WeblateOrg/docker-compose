@@ -5,5 +5,5 @@ else
     docker=(docker compose)
 fi
 
-CONTAINER=$($docker ps | grep _weblate_ | sed 's/[[:space:]].*//')
+CONTAINER=$(${docker[@]} ps | grep _weblate_ | sed 's/[[:space:]].*//')
 docker inspect "$CONTAINER"

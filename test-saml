@@ -5,4 +5,4 @@ else
     docker=(docker compose)
 fi
 
-$docker exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
+${docker[@]} exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
