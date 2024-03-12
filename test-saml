@@ -1,2 +1,8 @@
 #!/bin/sh
-docker-compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+$docker exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout

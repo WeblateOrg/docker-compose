@@ -1,3 +1,9 @@
 #!/bin/sh
-CONTAINER=$(docker-compose ps | grep _weblate_ | sed 's/[[:space:]].*//')
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+CONTAINER=$($docker ps | grep _weblate_ | sed 's/[[:space:]].*//')
 docker inspect "$CONTAINER"

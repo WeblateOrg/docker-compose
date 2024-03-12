@@ -1,8 +1,14 @@
 #!/bin/sh
-docker-compose exec -T weblate supervisorctl status all
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+$docker exec -T weblate supervisorctl status all
 RET=$?
 # The 3 happens with EXITED check and supervisor 4
 if [ $RET -ne 0 ] && [ $RET -ne 3 ] ; then
-    docker-compose logs
+    $docker logs
     exit 1
 fi

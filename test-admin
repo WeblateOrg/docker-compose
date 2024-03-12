@@ -1,2 +1,8 @@
 #!/bin/sh
-docker-compose exec -T --user weblate weblate weblate createadmin --update || exit 1
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+$docker compose exec -T --user weblate weblate weblate createadmin --update || exit 1
