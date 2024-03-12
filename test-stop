@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 read -rp "Also remove volumes? [yN]: " rmvol
 [[ $rmvol == [yY] ]] && vol=(--volumes)
 

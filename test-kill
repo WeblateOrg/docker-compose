@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Sure?"
 echo "This will kill weblate and could cause data loss!"
 sleep 1

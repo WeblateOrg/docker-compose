@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if command -v docker-compose 2>&1 /dev/null; then
     docker=(docker-compose)
 else
