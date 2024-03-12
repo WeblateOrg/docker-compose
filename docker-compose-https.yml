@@ -2,6 +2,9 @@ version: '3'
 services:
   weblate:
     image: weblate/weblate
+    # To use a custom port, change the first 8080 to your port
+    ports:
+      - 8080:8080
     tmpfs:
     - /run
     - /tmp
