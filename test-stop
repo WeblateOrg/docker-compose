@@ -1,8 +1,11 @@
 #!/bin/sh
+read -rp "Also remove volumes? [yN]: " rmvol
+[[ $rmvol == [yY] ]] && vol=volumes
+
 if command -v docker-compose 2>&1 /dev/null; then
     docker=(docker-compose)
 else
     docker=(docker compose)
 fi
 
-$docker down
+$docker down $vol
