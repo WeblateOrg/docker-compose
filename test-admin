@@ -5,4 +5,4 @@ else
     docker=(docker compose)
 fi
 
-"${docker[@]}" compose exec -T --user weblate weblate weblate createadmin --update || exit 1
+"${docker[@]}" exec -T --user weblate weblate weblate createadmin --update || exit 1
