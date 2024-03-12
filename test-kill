@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "Sure?"
+echo "This will kill weblate and could cause data loss!"
+sleep 1
+read -rp "To continue, enter Y or y: " continue
+[[ $continue != [yY] ]] && echo "Abort!" && exit 0
+
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+$docker kill
