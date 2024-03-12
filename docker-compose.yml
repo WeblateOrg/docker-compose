@@ -19,14 +19,14 @@ services:
     - database
     - cache
   database:
-    image: postgres:16-alpine
+    image: postgres:16.2
     env_file:
     - ./environment
     volumes:
     - postgres-data:/var/lib/postgresql/data
     restart: always
   cache:
-    image: redis:7-alpine
+    image: redis:7.2.4
     restart: always
     read_only: true
     command: [redis-server, --save, '60', '1']
