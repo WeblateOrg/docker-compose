@@ -5,10 +5,10 @@ else
     docker=(docker compose)
 fi
 
-${docker[@]} exec -T weblate supervisorctl status all
+"${docker[@]}" exec -T weblate supervisorctl status all
 RET=$?
 # The 3 happens with EXITED check and supervisor 4
 if [ $RET -ne 0 ] && [ $RET -ne 3 ] ; then
-    ${docker[@]} logs
+    "${docker[@]}" logs
     exit 1
 fi

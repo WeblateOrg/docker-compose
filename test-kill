@@ -11,4 +11,4 @@ else
     docker=(docker compose)
 fi
 
-${docker[@]} kill
+"${docker[@]}" kill

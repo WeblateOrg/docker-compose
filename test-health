@@ -5,7 +5,7 @@ else
     docker=(docker compose)
 fi
 
-${docker[@]} ps
-${docker[@]} exec -T \
+"${docker[@]}" ps
+"${docker[@]}" exec -T \
     --user weblate \
     weblate /app/bin/health_check

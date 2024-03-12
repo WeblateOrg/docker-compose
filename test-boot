@@ -5,4 +5,4 @@ else
     docker=(docker compose)
 fi
 
-${docker[@]} compose up -d
+"${docker[@]}" compose up -d

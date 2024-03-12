@@ -21,7 +21,7 @@ RET=$?
 curl --insecure --verbose --fail --max-time 3 --output /dev/null "${URL}static/weblate-128.png"
 RET2=$?
 # Display logs so far
-${docker[@]} logs
+"${docker[@]}" logs
 
 if [ $RET2 -ne 0 ] || [ $RET -ne 0 ] ; then
     exit 1
