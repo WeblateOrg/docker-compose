@@ -1,2 +1,8 @@
-#!/bin/sh
-docker-compose up -d
+#!/bin/bash
+if command -v docker-compose 2>&1 /dev/null; then
+    docker=(docker-compose)
+else
+    docker=(docker compose)
+fi
+
+"${docker[@]}" up -d
