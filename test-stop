@@ -8,4 +8,4 @@ else
     docker=(docker compose)
 fi
 
-"${docker[@]}" down $vol
+"${docker[@]}" down "${vol[@]}"
