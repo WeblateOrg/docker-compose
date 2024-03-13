@@ -1,5 +1,5 @@
 #!/bin/sh
-docker-compose ps
-docker-compose exec -T \
+docker compose ps
+docker compose exec -T \
     --user weblate \
     weblate /app/bin/health_check

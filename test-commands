@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
-docker-compose exec -T \
+docker compose exec -T \
     --user weblate \
     weblate licensee --help

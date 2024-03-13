@@ -50,7 +50,7 @@ Getting started
 
    .. code-block:: shell
 
-        docker-compose up
+        docker compose up
 
 5. For more detailed instructions and configuration visit https://docs.weblate.org/en/latest/admin/install/docker.html
 
