@@ -1,2 +1,2 @@
 #!/bin/sh
-docker-compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
+docker compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
