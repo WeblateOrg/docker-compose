@@ -33,7 +33,6 @@ Getting started
 
    .. code-block:: yml
 
-        version: '3'
         services:
           weblate:
             ports:
