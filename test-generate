@@ -25,7 +25,6 @@ if [ "$3" = "split" ] ; then
       WEBLATE_SITE_DOMAIN: test.example.com
 EOT
   done
-  sed -i -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
 fi
 if [ "$3" = "read-write" ] ; then
     sed -i -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
