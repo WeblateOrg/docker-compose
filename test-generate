@@ -7,7 +7,6 @@ services:
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
       WEBLATE_SITE_DOMAIN: test.example.com
-      WEBLATE_ENABLE_HTTPS: 1
       ${TEST_EXTRA_ENV}
     ports:
       - 8080:8080
