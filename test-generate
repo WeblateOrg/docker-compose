@@ -7,6 +7,7 @@ services:
     environment:
       WEBLATE_TIME_ZONE: Europe/Prague
       WEBLATE_SITE_DOMAIN: test.example.com
+      WEBLATE_SILENCED_SYSTEM_CHECKS: weblate.E003,weblate.E011,weblate.E012,weblate.E013,weblate.E017,security.W004,security.W008,security.W012,security.W018,weblate.I021,weblate.E016,weblate.I028,weblate.C030,otp_webauthn.E031
       ${TEST_EXTRA_ENV}
     ports:
       - 8080:8080
