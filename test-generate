@@ -28,7 +28,7 @@ EOT
   done
 fi
 if [ "$3" = "read-write" ] ; then
-    sed -i -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
+    sed -i  -e '/tmpfs:/D' -e '/- \/run/D' -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
 else
     # Allow execution in tmp
     sed -i 's/- \/tmp/- \/tmp:exec/' docker-compose.yml
