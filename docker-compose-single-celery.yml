@@ -17,7 +17,7 @@ services:
     environment:
       SINGLE_CELERY_PROCESS: 1
   database:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     env_file:
     - ./environment
     volumes:
