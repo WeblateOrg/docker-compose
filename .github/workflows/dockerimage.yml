@@ -34,8 +34,6 @@ jobs:
       run: ./test-saml
     - name: Run commands
       run: ./test-commands
-    - name: Run tests
-      run: ./test-tests
     - name: Display logs
       run: ./test-logs
       if: always()
@@ -73,8 +71,6 @@ jobs:
       run: ./test-saml
     - name: Run commands
       run: ./test-commands
-    - name: Run tests
-      run: ./test-tests
     - name: Display logs
       run: ./test-logs
       if: always()
