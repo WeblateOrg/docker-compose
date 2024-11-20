@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Test content
+      run: ./test-content
     - name: Generate configuration
       run: ./test-generate 8080 http
     - name: Startup container
