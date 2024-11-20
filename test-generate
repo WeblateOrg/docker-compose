@@ -42,3 +42,8 @@ PROTO=${2:-http}
 cat > .test.env <<EOT
 URL=$PROTO://$IP:$PORT/
 EOT
+
+echo "Weblate will be running on $PROTO://$IP:$PORT/"
+echo
+echo "Weblate configuration (docker.compose.yml):"
+cat docker-compose.yml
