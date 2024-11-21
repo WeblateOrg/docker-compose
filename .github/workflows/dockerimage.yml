@@ -8,14 +8,13 @@ jobs:
     env:
       # Use short project name, otherwise inspect output is messy
       COMPOSE_PROJECT_NAME: wl
-      TEST_EXTRA_ENV: 'WEBLATE_SAML_IDP_URL: https://example.com/idp'
 
     steps:
     - uses: actions/checkout@v4
     - name: Test content
       run: ./test-content
     - name: Generate configuration
-      run: ./test-generate 8080 http
+      run: ./test-generate 8080 http saml
     - name: Startup container
       run: ./test-boot
     - name: List Python packages
@@ -33,7 +32,7 @@ jobs:
     - name: Test admin creation
       run: ./test-admin
     - name: Verify SAML certificate
-      run: ./test-saml
+      run: ./test-saml saml
     - name: Run commands
       run: ./test-commands
     - name: Display logs
@@ -47,7 +46,6 @@ jobs:
     env:
       # Use short project name, otherwise inspect output is messy
       COMPOSE_PROJECT_NAME: wl
-      TEST_EXTRA_ENV: 'WEBLATE_SAML_IDP_URL: https://example.com/idp'
 
     steps:
     - uses: actions/checkout@v4
@@ -70,7 +68,7 @@ jobs:
     - name: Test admin creation
       run: ./test-admin
     - name: Verify SAML certificate
-      run: ./test-saml
+      run: ./test-saml read-write
     - name: Run commands
       run: ./test-commands
     - name: Display logs

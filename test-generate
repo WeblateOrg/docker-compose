@@ -1,4 +1,10 @@
 #!/bin/sh
+if [ "$3" = "saml" ] ; then
+    TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
+else
+    TEST_EXTRA_ENV=''
+fi
+
 cat > docker-compose.override.yml <<EOT
 services:
   weblate:
