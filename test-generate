@@ -30,7 +30,7 @@ fi
 if [ "$3" = "read-write" ] || [ "$3" = "localtime" ] ; then
     sed -i  -e '/tmpfs:/D' -e '/- \/run/D' -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
     if [ "$3" = "localtime" ] ; then
-        sed -i -e '/weblate-cache:/a\
+        sed -i -e '/weblate-cache:\/app\/cache/a\
     - /etc/localtime:/etc/localtime:ro' docker-compose.yml
     fi
 else
