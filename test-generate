@@ -1,6 +1,8 @@
 #!/bin/sh
 if [ "$3" = "saml" ] ; then
     TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
+elif [ "$3" = "celery-single" ] ; then
+    TEST_EXTRA_ENV='CELERY_SINGLE_PROCESS: 1'
 else
     TEST_EXTRA_ENV=''
 fi
