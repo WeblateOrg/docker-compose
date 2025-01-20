@@ -1,7 +1,7 @@
 #!/bin/sh
 
 STORAGE=$(mktemp)
-cleanup(){
+cleanup() {
     rm "$STORAGE"
 }
 trap cleanup EXIT
@@ -15,7 +15,7 @@ docker rm tmp_$$
 echo "Checking content..."
 
 # /app/data is not checked because it contains stub for customization
-if grep -E '^(app/cache|tmp|run)/.+' "$STORAGE" ; then
+if grep -E '^(app/cache|tmp|run)/.+' "$STORAGE"; then
     echo "Volumes contain files!"
     exit 1
 fi
