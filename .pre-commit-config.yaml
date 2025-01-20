@@ -45,6 +45,17 @@ repos:
   rev: v3.10.0-2
   hooks:
   - id: shfmt
+- repo: local
+  hooks:
+  - id: dclint
+    name: Docker Compose Linter
+    entry: dclint .
+    language: node
+    require_serial: true
+    pass_filenames: false
+    additional_dependencies:
+    - dclint@2.2.2
+
 
 ci:
   autoupdate_schedule: quarterly

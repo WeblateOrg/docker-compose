@@ -1,0 +1,4 @@
+rules:
+  no-unbound-port-interfaces: 0
+  service-image-require-explicit-tag: 0
+  require-project-name-field: 0
