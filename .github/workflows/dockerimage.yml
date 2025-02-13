@@ -76,3 +76,5 @@ jobs:
       if: always()
     - name: Shutdown service
       run: ./test-stop
+permissions:
+  contents: read
