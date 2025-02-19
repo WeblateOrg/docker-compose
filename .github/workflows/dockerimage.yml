@@ -10,7 +10,7 @@ jobs:
       COMPOSE_PROJECT_NAME: wl
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     - name: Test content
       run: ./test-content
     - name: Generate configuration
@@ -48,7 +48,7 @@ jobs:
       COMPOSE_PROJECT_NAME: wl
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
     - name: Generate configuration
       run: ./test-generate 8080 http read-write
     - name: Startup container
