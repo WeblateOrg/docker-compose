@@ -55,8 +55,12 @@ repos:
     pass_filenames: false
     additional_dependencies:
     - dclint@2.2.2
-
-
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.4.1
+  hooks:
+  - id: codespell
+    additional_dependencies:
+    - tomli
 - repo: https://github.com/rhysd/actionlint
   rev: v1.7.7
   hooks:
