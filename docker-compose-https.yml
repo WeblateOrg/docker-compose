@@ -1,20 +1,20 @@
 services:
   cache:
-    image: redis:7-alpine
+    image: redis:7-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
     volumes:
     - redis-data:/data
     command: [redis-server, --save, '60', '1']
     restart: always
     read_only: true
   database:
-    image: postgres:17-alpine
+    image: postgres:17-alpine@sha256:7062a2109c4b51f3c792c7ea01e83ed12ef9a980886e3b3d380a7d2e5f6ce3f5
     volumes:
     - postgres-data:/var/lib/postgresql/data
     env_file:
     - ./environment
     restart: always
   https-portal:
-    image: steveltn/https-portal:1
+    image: steveltn/https-portal:1@sha256:945b1a6fe1e2496fc8f0535a4121b2ab8e68b187b8fcdc50dacc2faf6589edd3
     volumes:
     - ssl-certs:/var/lib/https-portal
     environment:
@@ -25,7 +25,7 @@ services:
     - 443:443
     restart: always
   weblate:
-    image: weblate/weblate
+    image: weblate/weblate@sha256:7c0f20ce0b6334cac103533696681b89e11f5970d43819c9bf7d8d10ec937e9a
     depends_on:
     - cache
     - database
