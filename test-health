@@ -6,20 +6,18 @@ docker compose exec -T \
 
 failure=0
 
-container_id="$(docker compose ps -q weblate)"
-# shellcheck disable=SC2034
-for i in $(seq 30); do
-    container_status="$(docker inspect --format '{{json .State.Health.Status }}' "$container_id")"
-    if [ "$container_status" != '"starting"' ]; then
-        break
-    fi
-    echo "Waiting for container weblate to be up..."
-    sleep 1
-done
-
 # shellcheck disable=SC2013
 for service in $(sed -n 's/^  \(weblate.*\):$/\1/p' docker-compose.yml); do
     container_id="$(docker compose ps -q "$service")"
+    # shellcheck disable=SC2034
+    for i in $(seq 30); do
+        container_status="$(docker inspect --format '{{json .State.Health.Status }}' "$container_id")"
+        if [ "$container_status" != '"starting"' ]; then
+            break
+        fi
+        echo "Waiting for container $service to be up..."
+        sleep 1
+    done
     container_status="$(docker inspect --format '{{json .State.Health.Status }}' "$container_id")"
     echo "Container $service is $container_status"
     if [ "$container_status" != '"healthy"' ]; then
