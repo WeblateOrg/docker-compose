@@ -1,6 +1,6 @@
 services:
   cache:
-    image: redis:7-alpine
+    image: redis:8-alpine
     volumes:
     - redis-data:/data
     command: [redis-server, --save, '60', '1']
