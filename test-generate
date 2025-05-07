@@ -25,7 +25,7 @@ services:
 EOT
 
 if [ "$3" = "anubis" ]; then
-    cat > docker-compose.override.yml << EOT
+    cat >> docker-compose.override.yml << EOT
     depends_on:
     - anubis
 
@@ -79,3 +79,5 @@ echo "Weblate will be running on $PROTO://$IP:$PORT/"
 echo
 echo "Weblate configuration (docker.compose.yml):"
 cat docker-compose.yml
+echo "Weblate configuration (docker.compose.override.yml):"
+cat docker-compose.override.yml
