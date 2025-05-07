@@ -3,6 +3,8 @@ if [ "$3" = "saml" ]; then
     TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
 elif [ "$3" = "celery-single" ]; then
     TEST_EXTRA_ENV='CELERY_SINGLE_PROCESS: 1'
+elif [ "$3" = "anubis" ]; then
+    TEST_EXTRA_ENV='WEBLATE_ANUBIS_URL: http://anubis:8923'
 else
     TEST_EXTRA_ENV=''
 fi
@@ -21,6 +23,25 @@ services:
       - 8080:8080
       - 4443:4443
 EOT
+
+if [ "$3" = "anubis" ]; then
+    cat > docker-compose.override.yml << EOT
+    depends_on:
+    - anubis
+
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    environment:
+      BIND: ":8923"
+      DIFFICULTY: "4"
+      METRICS_BIND: ":9090"
+      SERVE_ROBOTS_TXT: "false"
+      TARGET: " "
+      OG_PASSTHROUGH: "false"
+      ED25519_PRIVATE_KEY_HEX: "$(openssl rand -hex 32)"
+
+EOT
+fi
 
 if [ "$3" = "split" ]; then
     mv docker-compose-split.yml docker-compose.yml
