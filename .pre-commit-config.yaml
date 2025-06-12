@@ -54,7 +54,7 @@ repos:
     require_serial: true
     pass_filenames: false
     additional_dependencies:
-    - dclint@2.2.2
+    - dclint@3.0.0
 - repo: https://github.com/codespell-project/codespell
   rev: v2.4.1
   hooks:
