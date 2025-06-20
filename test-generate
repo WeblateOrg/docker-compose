@@ -26,9 +26,19 @@ EOT
 
 if [ "$3" = "anubis" ]; then
     cat > botPolicy.yaml << EOT
-- name: block-amazonbot
-  user_agent_regex: Amazonbot
-  action: DENY
+bots:
+  - name: well-known
+    path_regex: ^/.well-known/.*$
+    action: ALLOW
+  - name: favicon
+    path_regex: ^/favicon.ico$
+    action: ALLOW
+  - name: robots-txt
+    path_regex: ^/robots.txt$
+    action: ALLOW
+  - name: generic-browser
+    user_agent_regex: Mozilla
+    action: CHALLENGE
 EOT
     cat >> docker-compose.override.yml << EOT
     depends_on:
