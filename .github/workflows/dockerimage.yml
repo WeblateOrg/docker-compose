@@ -80,5 +80,43 @@ jobs:
       if: always()
     - name: Shutdown service
       run: ./test-stop
+
+  anubis:
+    runs-on: ubuntu-24.04
+    env:
+      # Use short project name, otherwise inspect output is messy
+      COMPOSE_PROJECT_NAME: wl
+
+    steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        persist-credentials: false
+    - name: Generate configuration
+      run: ./test-generate 8080 http anubis
+    - name: Startup container
+      run: ./test-boot
+    - name: List Python packages
+      run: ./test-pip
+    - name: Inspect container
+      run: ./test-inspect
+    - name: Check service is running
+      run: ./test-online
+    - name: Check service health status
+      run: ./test-health
+    - name: Run Django Checks
+      run: ./test-checks
+    - name: Verify supervisor
+      run: ./test-supervisor
+    - name: Test admin creation
+      run: ./test-admin
+    - name: Verify SAML certificate
+      run: ./test-saml read-write
+    - name: Run commands
+      run: ./test-commands
+    - name: Display logs
+      run: ./test-logs
+      if: always()
+    - name: Shutdown service
+      run: ./test-stop
 permissions:
   contents: read
