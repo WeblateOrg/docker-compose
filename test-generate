@@ -25,6 +25,11 @@ services:
 EOT
 
 if [ "$3" = "anubis" ]; then
+    cat > botPolicy.yaml << EOT
+- name: block-amazonbot
+  user_agent_regex: Amazonbot
+  action: DENY
+EOT
     cat >> docker-compose.override.yml << EOT
     depends_on:
     - anubis
@@ -39,6 +44,8 @@ if [ "$3" = "anubis" ]; then
       TARGET: " "
       OG_PASSTHROUGH: "false"
       ED25519_PRIVATE_KEY_HEX: "$(openssl rand -hex 32)"
+    volumes:
+    - "./botPolicy.yaml:/data/cfg/botPolicy.yaml:ro"
 
 EOT
 fi
