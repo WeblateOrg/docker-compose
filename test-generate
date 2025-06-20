@@ -52,6 +52,7 @@ EOT
       METRICS_BIND: ":9090"
       SERVE_ROBOTS_TXT: "false"
       TARGET: " "
+      POLICY_FNAME: "/data/cfg/botPolicy.yaml"
       OG_PASSTHROUGH: "false"
       ED25519_PRIVATE_KEY_HEX: "$(openssl rand -hex 32)"
     volumes:
