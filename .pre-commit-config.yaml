@@ -42,7 +42,7 @@ repos:
   - id: shellcheck
     require_serial: true
 - repo: https://github.com/scop/pre-commit-shfmt
-  rev: v3.11.0-1
+  rev: v3.12.0-1
   hooks:
   - id: shfmt
 - repo: https://github.com/docker-compose-linter/pre-commit-dclint
