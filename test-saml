@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$1" = "saml" ]; then
-	docker compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
+    docker compose exec -T weblate openssl x509 -in /app/data/ssl/saml.crt -text -noout
 else
-	docker compose exec -T weblate test ! -f /app/data/ssl/saml.crt
+    docker compose exec -T weblate test ! -f /app/data/ssl/saml.crt
 fi

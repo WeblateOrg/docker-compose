@@ -1,15 +1,15 @@
 #!/bin/sh
 if [ "$3" = "saml" ]; then
-	TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
+    TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
 elif [ "$3" = "celery-single" ]; then
-	TEST_EXTRA_ENV='CELERY_SINGLE_PROCESS: 1'
+    TEST_EXTRA_ENV='CELERY_SINGLE_PROCESS: 1'
 elif [ "$3" = "anubis" ]; then
-	TEST_EXTRA_ENV='WEBLATE_ANUBIS_URL: http://anubis:8923'
+    TEST_EXTRA_ENV='WEBLATE_ANUBIS_URL: http://anubis:8923'
 else
-	TEST_EXTRA_ENV=''
+    TEST_EXTRA_ENV=''
 fi
 
-cat >docker-compose.override.yml <<EOT
+cat > docker-compose.override.yml << EOT
 services:
   weblate:
     image: ${TEST_CONTAINER:-weblate/weblate:edge}
@@ -25,7 +25,7 @@ services:
 EOT
 
 if [ "$3" = "anubis" ]; then
-	cat >botPolicy.yaml <<EOT
+    cat > botPolicy.yaml << EOT
 bots:
   - name: well-known
     path_regex: ^/.well-known/.*$
@@ -40,7 +40,7 @@ bots:
     user_agent_regex: Mozilla
     action: CHALLENGE
 EOT
-	cat >>docker-compose.override.yml <<EOT
+    cat >> docker-compose.override.yml << EOT
     depends_on:
     - anubis
 
@@ -62,9 +62,9 @@ EOT
 fi
 
 if [ "$3" = "split" ]; then
-	mv docker-compose-split.yml docker-compose.yml
-	for service in celery-backup celery-beat celery-celery celery-memory celery-notify celery-translate; do
-		cat >>docker-compose.override.yml <<EOT
+    mv docker-compose-split.yml docker-compose.yml
+    for service in celery-backup celery-beat celery-celery celery-memory celery-notify celery-translate; do
+        cat >> docker-compose.override.yml << EOT
   weblate-${service}:
     image: ${TEST_CONTAINER:-weblate/weblate:edge}
     restart: no
@@ -72,24 +72,24 @@ if [ "$3" = "split" ]; then
       WEBLATE_TIME_ZONE: Europe/Prague
       WEBLATE_SITE_DOMAIN: test.example.com
 EOT
-	done
+    done
 fi
 if [ "$3" = "read-write" ] || [ "$3" = "localtime" ]; then
-	sed -i -e '/tmpfs:/D' -e '/- \/run/D' -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
-	if [ "$3" = "localtime" ]; then
-		sed -i -e '/weblate-cache:\/app\/cache/a\
+    sed -i -e '/tmpfs:/D' -e '/- \/run/D' -e '/- \/tmp/D' -e '/read_only: true/D' docker-compose.yml
+    if [ "$3" = "localtime" ]; then
+        sed -i -e '/weblate-cache:\/app\/cache/a\
     - /etc/localtime:/etc/localtime:ro' docker-compose.yml
-	fi
+    fi
 else
-	# Allow execution in tmp
-	sed -i 's/- \/tmp/- \/tmp:exec/' docker-compose.yml
+    # Allow execution in tmp
+    sed -i 's/- \/tmp/- \/tmp:exec/' docker-compose.yml
 fi
 
 IP=127.0.0.1
 PORT=${1:-8080}
 PROTO=${2:-http}
 
-cat >.test.env <<EOT
+cat > .test.env << EOT
 URL=$PROTO://$IP:$PORT/
 EOT
 
