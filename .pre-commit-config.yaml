@@ -69,3 +69,5 @@ repos:
   - id: gitleaks-docker
 ci:
   autoupdate_schedule: quarterly
+  skip:
+  - gitleaks-docker
