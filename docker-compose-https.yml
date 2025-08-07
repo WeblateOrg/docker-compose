@@ -35,6 +35,7 @@ services:
     environment:
       WEBLATE_ENABLE_HTTPS: 1
       WEBLATE_IP_PROXY_HEADER: HTTP_X_FORWARDED_FOR
+      WEBLATE_SECURE_PROXY_SSL_HEADER: HTTP_X_FORWARDED_PROTO,https
     env_file:
     - ./environment
     restart: always
