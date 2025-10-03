@@ -9,7 +9,7 @@ services:
   database:
     image: postgres:18-alpine
     volumes:
-    - postgres-data:/var/lib/postgresql/data
+    - postgres-data:/var/lib/postgresql
     env_file:
     - ./environment
     restart: always
