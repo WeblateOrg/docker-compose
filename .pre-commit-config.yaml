@@ -32,7 +32,7 @@ repos:
   hooks:
   - id: mdformat
     additional_dependencies:
-    - mdformat-gfm==0.4.1
+    - mdformat-gfm==1.0.0
     - mdformat-shfmt==0.2.0
     - mdformat_tables==1.0.0
 - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -66,8 +66,7 @@ repos:
 - repo: https://github.com/gitleaks/gitleaks
   rev: v8.28.0
   hooks:
-  - id: gitleaks-docker
+  - id: gitleaks
 ci:
   autoupdate_schedule: quarterly
-  skip:
-  - gitleaks-docker
+  skip: []
