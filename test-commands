@@ -9,3 +9,6 @@ docker compose exec -T \
 docker compose exec -T \
     --user weblate \
     weblate ssh -V
+docker compose exec -T \
+    --user weblate \
+    weblate uv python list
