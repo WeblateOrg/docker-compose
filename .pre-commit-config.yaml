@@ -61,10 +61,10 @@ repos:
   rev: v1.22.0
   hooks:
   - id: zizmor
-- repo: https://github.com/gitleaks/gitleaks
-  rev: v8.30.0
+- repo: https://github.com/mongodb/kingfisher
+  rev: v1.77.0
   hooks:
-  - id: gitleaks
+  - id: kingfisher-auto
 ci:
   autoupdate_schedule: quarterly
   skip: []
