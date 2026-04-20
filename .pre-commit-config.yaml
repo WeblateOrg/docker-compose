@@ -27,12 +27,6 @@ repos:
   hooks:
   - id: pretty-format-yaml
     args: [--autofix, --indent, '2']
-- repo: https://github.com/executablebooks/mdformat
-  rev: 1.0.0
-  hooks:
-  - id: mdformat
-    additional_dependencies:
-    - mdformat-gfm==1.0.0
 - repo: https://github.com/shellcheck-py/shellcheck-py
   rev: v0.11.0.1
   hooks:
@@ -65,6 +59,11 @@ repos:
   rev: v1.95.0
   hooks:
   - id: kingfisher-auto
+- repo: https://github.com/rvben/rumdl-pre-commit
+  rev: v0.1.62
+  hooks:
+  - id: rumdl
+  - id: rumdl-fmt
 ci:
   autoupdate_schedule: quarterly
   skip:
