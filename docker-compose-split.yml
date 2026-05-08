@@ -32,7 +32,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-backup:
     image: weblate/weblate
     depends_on:
@@ -54,7 +54,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-beat:
     image: weblate/weblate
     depends_on:
@@ -75,7 +75,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-celery:
     image: weblate/weblate
     depends_on:
@@ -97,7 +97,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-memory:
     image: weblate/weblate
     depends_on:
@@ -119,7 +119,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-notify:
     image: weblate/weblate
     depends_on:
@@ -141,7 +141,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
   weblate-celery-translate:
     image: weblate/weblate
     depends_on:
@@ -163,7 +163,7 @@ services:
     tmpfs:
     - /run
     - /tmp
-    - /app/cache
+    - /app/cache:exec
 volumes:
   weblate-data: {}
   postgres-data: {}
