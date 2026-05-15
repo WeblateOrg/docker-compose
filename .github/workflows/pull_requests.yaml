@@ -18,7 +18,7 @@ jobs:
     if: github.actor == 'weblate'
     steps:
     - name: Enable Pull Request Automerge
-      run: gh pr merge --rebase --auto "$PR_NUMBER"
+      run: gh pr merge --repo "$GITHUB_REPOSITORY" --rebase --auto "$PR_NUMBER"
       env:
         GH_TOKEN: ${{ secrets.WEBLATE_CI_TOKEN }} # zizmor: ignore[secrets-outside-env]
         PR_NUMBER: ${{ github.event.pull_request.number }}
