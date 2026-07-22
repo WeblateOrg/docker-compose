@@ -1,6 +1,6 @@
 services:
   cache:
-    image: valkey/valkey:9.1.0
+    image: valkey/valkey:9.1.1
     volumes:
     - redis-data:/data
     command: [valkey-server, --save, '60', '1', --loglevel, warning]
