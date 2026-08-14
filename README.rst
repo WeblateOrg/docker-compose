@@ -53,6 +53,21 @@ Getting started
 
 5. For more detailed instructions and configuration visit https://docs.weblate.org/en/latest/admin/install/docker.html
 
+Reverse proxy client addresses
+------------------------------
+
+When ``WEBLATE_IP_PROXY_HEADER=HTTP_X_FORWARDED_FOR`` is enabled, list the IP
+addresses, networks, or hostnames of the reverse proxies which can connect to
+Weblate in ``WEBLATE_TRUSTED_PROXY_ADDRESSES``. Separate multiple values by
+whitespace. The built-in nginx uses this list to determine the client address
+for its logs and forwards only that normalized address to Weblate. If the list
+is empty, the immediate TCP peer is used. Because nginx forwards a single
+normalized address, the container uses an effective
+``WEBLATE_IP_PROXY_OFFSET`` of ``0`` in this mode.
+
+Do not expose the Weblate container ports through a path which bypasses the
+listed proxies.
+
 Rebuilding the weblate docker image
 -----------------------------------
 
