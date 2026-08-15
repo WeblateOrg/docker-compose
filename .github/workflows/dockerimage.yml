@@ -1,124 +1,43 @@
-name: Docker Image CI
+name: Docker Compose smoke tests
 
 on:
   push:
   pull_request:
 
-jobs:
-  read-only:
-    runs-on: ubuntu-24.04
-    env:
-      # Use short project name, otherwise inspect output is messy
-      COMPOSE_PROJECT_NAME: wl
-
-    steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        persist-credentials: false
-    - name: Test content
-      run: ./test-content
-    - name: Generate configuration
-      run: ./test-generate 8080 http saml
-    - name: Startup container
-      run: ./test-boot
-    - name: List Python packages
-      run: ./test-pip
-    - name: Inspect container
-      run: ./test-inspect
-    - name: Check service is running
-      run: ./test-online
-    - name: Check service health status
-      run: ./test-health
-    - name: Run Django Checks
-      run: ./test-checks
-    - name: Verify supervisor
-      run: ./test-supervisor
-    - name: Test admin creation
-      run: ./test-admin
-    - name: Verify SAML certificate
-      run: ./test-saml saml
-    - name: Run commands
-      run: ./test-commands
-    - name: Display logs
-      run: ./test-logs
-      if: always()
-    - name: Shutdown service
-      run: ./test-stop
-
-  read-write:
-    runs-on: ubuntu-24.04
-    env:
-      # Use short project name, otherwise inspect output is messy
-      COMPOSE_PROJECT_NAME: wl
-
-    steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        persist-credentials: false
-    - name: Generate configuration
-      run: ./test-generate 8080 http read-write
-    - name: Startup container
-      run: ./test-boot
-    - name: List Python packages
-      run: ./test-pip
-    - name: Inspect container
-      run: ./test-inspect
-    - name: Check service is running
-      run: ./test-online
-    - name: Check service health status
-      run: ./test-health
-    - name: Run Django Checks
-      run: ./test-checks
-    - name: Verify supervisor
-      run: ./test-supervisor
-    - name: Test admin creation
-      run: ./test-admin
-    - name: Verify SAML certificate
-      run: ./test-saml read-write
-    - name: Run commands
-      run: ./test-commands
-    - name: Display logs
-      run: ./test-logs
-      if: always()
-    - name: Shutdown service
-      run: ./test-stop
-
-  anubis:
-    runs-on: ubuntu-24.04
-    env:
-      # Use short project name, otherwise inspect output is messy
-      COMPOSE_PROJECT_NAME: wl
-
-    steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        persist-credentials: false
-    - name: Generate configuration
-      run: ./test-generate 8080 http anubis
-    - name: Startup container
-      run: ./test-boot
-    - name: List Python packages
-      run: ./test-pip
-    - name: Inspect container
-      run: ./test-inspect
-    - name: Check service is running
-      run: ./test-online
-    - name: Check service health status
-      run: ./test-health
-    - name: Run Django Checks
-      run: ./test-checks
-    - name: Verify supervisor
-      run: ./test-supervisor
-    - name: Test admin creation
-      run: ./test-admin
-    - name: Verify SAML certificate
-      run: ./test-saml read-write
-    - name: Run commands
-      run: ./test-commands
-    - name: Display logs
-      run: ./test-logs
-      if: always()
-    - name: Shutdown service
-      run: ./test-stop
 permissions:
   contents: read
+
+jobs:
+  smoke:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - name: Read-only with SAML
+          variant: saml
+        - name: Read-write
+          variant: read-write
+        - name: Anubis
+          variant: anubis
+    env:
+      # Use short project name, otherwise inspect output is messy
+      COMPOSE_PROJECT_NAME: wl
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - name: Generate configuration
+      run: ./test-generate 8080 http "${{ matrix.variant }}"
+    - name: Start containers
+      run: ./test-boot
+    - name: Run smoke tests
+      run: ./test-smoke "${{ matrix.variant }}"
+    - name: Display logs
+      if: always()
+      run: ./test-logs
+    - name: Stop containers
+      if: always()
+      run: ./test-stop

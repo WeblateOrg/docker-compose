@@ -22,7 +22,7 @@ for service in $(sed -n 's/^  \(weblate.*\):$/\1/p' docker-compose.yml); do
     echo "Container $service is $container_status"
     if [ "$container_status" != '"healthy"' ]; then
         failure=$((failure + 1))
-        docker inspect --format "{{json .State.Health }}" 67926a72d8b20e8ea379d7d03449fdde6d38bd39599b0b21b4fb880479049da3 | jq
+        docker inspect --format "{{json .State.Health }}" "$container_id" | jq
         echo
     fi
 done

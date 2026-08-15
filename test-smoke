@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+TEST_VARIANT=${1:?Missing test variant}
+
+echo "Checking service reachability..."
+./test-online
+
+echo "Checking container health..."
+./test-health
+
+echo "Checking SAML certificate state..."
+./test-saml "$TEST_VARIANT"
