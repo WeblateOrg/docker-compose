@@ -22,7 +22,7 @@ services:
     - weblate-data:/app/data
     - weblate-cache:/app/cache
     environment:
-      SINGLE_CELERY_PROCESS: 1
+      CELERY_SINGLE_PROCESS: 1
     env_file:
     - ./environment
     restart: always
