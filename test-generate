@@ -2,7 +2,11 @@
 if [ "$3" = "saml" ]; then
     TEST_EXTRA_ENV='WEBLATE_SAML_IDP_URL: https://example.com/idp'
 elif [ "$3" = "celery-single" ]; then
+    TEST_EXTRA_ENV='CELERY_WORKER_MODE: single'
+elif [ "$3" = "celery-single-legacy" ]; then
     TEST_EXTRA_ENV='CELERY_SINGLE_PROCESS: 1'
+elif [ "$3" = "celery-combined-options" ]; then
+    TEST_EXTRA_ENV='CELERY_COMBINED_OPTIONS: --concurrency 5'
 elif [ "$3" = "asgi" ]; then
     TEST_EXTRA_ENV='WEBLATE_ASGI: 1'
 elif [ "$3" = "anubis" ]; then
