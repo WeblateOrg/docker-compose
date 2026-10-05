@@ -53,7 +53,7 @@ Getting started
 
         docker compose up
 
-5. For more detailed instructions and configuration visit https://docs.weblate.org/en/latest/admin/install/docker.html
+4. For more detailed instructions and configuration visit https://docs.weblate.org/en/latest/admin/install/docker.html
 
 Reverse proxy client addresses
 ------------------------------
