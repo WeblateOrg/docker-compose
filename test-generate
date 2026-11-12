@@ -60,6 +60,7 @@ EOT
       TARGET: " "
       POLICY_FNAME: "/data/cfg/botPolicy.yaml"
       OG_PASSTHROUGH: "false"
+      REDIRECT_DOMAINS: "test.example.com"
       ED25519_PRIVATE_KEY_HEX: "$(openssl rand -hex 32)"
     volumes:
     - "./botPolicy.yaml:/data/cfg/botPolicy.yaml:ro"
