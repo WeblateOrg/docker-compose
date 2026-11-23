@@ -52,11 +52,11 @@ repos:
   hooks:
   - id: zizmor
 - repo: https://github.com/mongodb/kingfisher
-  rev: v2.19.1
+  rev: v2.20.0
   hooks:
-  - id: kingfisher-auto
+  - id: kingfisher-auto-files
     env:
-      KINGFISHER_VERSION: v2.19.1
+      KINGFISHER_VERSION: v2.20.0
 - repo: https://github.com/rvben/rumdl-pre-commit
   rev: v0.3.5
   hooks:
@@ -69,4 +69,4 @@ repos:
 ci:
   autoupdate_schedule: quarterly
   skip:
-  - kingfisher-auto
+  - kingfisher-auto-files
